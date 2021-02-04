@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\Payment\" />
+    <Folder Include="Dtos\Transaction\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+</Project>
