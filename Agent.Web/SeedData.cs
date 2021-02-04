@@ -64,7 +64,7 @@ namespace Agent.Web
                     Image = "net_design_patterns.png"
                 },
                 new Book {
-                    Title = "ASP.NET Core Application Development: Building an application in four sprints",
+                    Title = "ASP.NET Core Application Development",
                     Author = "James Chambers, David Paquette, Simon Timms",
                     Publisher = "Microsoft Press",
                     Price = 80.00m,

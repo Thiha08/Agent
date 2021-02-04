@@ -27,6 +27,7 @@ namespace Agent.Web.Controllers
         // GET: Home
         public async Task<IActionResult> Index(string catalogue= null)
         {
+            TempData["catalogue"] = catalogue;
             var catalogues = await _catalogueService.GetCataloguesAsync(catalogue);
             var viewModelCatalogues = _mapper.Map<IEnumerable<CatalogueViewModel>>(catalogues);
             return View(viewModelCatalogues);

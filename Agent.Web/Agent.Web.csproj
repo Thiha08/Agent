@@ -23,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\lib\font-awesome\less\" />
+    <Folder Include="wwwroot\lib\font-awesome\scss\" />
+    <Folder Include="wwwroot\lib\jquery.counterup\demo\" />
+    <Folder Include="wwwroot\lib\jquery.scrollto\demo\" />
   </ItemGroup>
 
 </Project>

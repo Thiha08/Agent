@@ -1,16 +1,14 @@
 ﻿@using Agent.Web.ViewModels
 @model BookViewModel
 
-<div class="panel-body">
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="~/images/@Model.Image" />
-        </a>
-        <div class="media-body">
-            <h3 class="media-heading">
-                @Model.Title
-            </h3>
-            <p>@Model.Author</p>
+<div class="col-lg-4 col-md-6">
+    <div class="product">
+        <div class="image"><a href="shop-detail.html"><img src="~/images/@Model.Image" alt="" class="img-fluid image1"></a></div>
+        <div class="text">
+            <h3 class="h5"><a href="shop-detail.html">@Model.Title</a></h3>
+            <p class="price">
+                @Model.Price
+            </p>
         </div>
     </div>
 </div>
