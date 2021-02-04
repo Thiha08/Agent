@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Payment\" />
-    <Folder Include="Dtos\Transaction\" />
-    <Folder Include="Interfaces\" />
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agent.SharedKernel\Agent.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

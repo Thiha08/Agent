@@ -1,4 +1,8 @@
 ﻿using Agent.Core;
+using Agent.Core.Interfaces;
+using Agent.Infrastructure.Data;
+using Agent.Infrastructure.Services;
+using Agent.SharedKernel.Interfaces;
 using Autofac;
 using OnePay.PaymentApi;
 using OnePay.TransactionApi;
@@ -49,6 +53,12 @@ namespace Agent.Infrastructure
 
         private void RegisterCommonDependencies(ContainerBuilder builder)
         {
+            builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+
+            builder.RegisterType<CatalogueService>().As<ICatalogueService>().InstancePerDependency();
+            builder.RegisterType<BookService>().As<IBookService>().InstancePerDependency();
+
+            // OnePay Services
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerDependency();
             builder.RegisterType<TransactionService>().As<ITransactionService>().InstancePerDependency();
         }

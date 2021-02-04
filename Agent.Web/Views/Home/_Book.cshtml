@@ -1,0 +1,16 @@
+﻿@using Agent.Web.ViewModels
+@model BookViewModel
+
+<div class="panel-body">
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="~/images/@Model.Image" />
+        </a>
+        <div class="media-body">
+            <h3 class="media-heading">
+                @Model.Title
+            </h3>
+            <p>@Model.Author</p>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Agent.Core.Constants.OnePay;
 using Agent.Infrastructure;
+using Agent.Web.Mappers;
 using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,6 +35,11 @@ namespace Agent.Web
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext(connectionString);
+
+            services.AddAutoMapper(typeof(AutomapperMaps));
 
             services.AddControllersWithViews();
 

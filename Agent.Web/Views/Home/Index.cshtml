@@ -1,0 +1,37 @@
+﻿@using Agent.Web.ViewModels
+
+@model IEnumerable<CatalogueViewModel>
+
+@{
+    ViewBag.Title = "Agent";
+}
+
+<p>
+
+</p>
+<div class="container">
+    <div class="jumbotron">
+
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="pull-right" asp-controller="Home" asp-action="Index" asp-route-catalogue="@item.Name">
+                        View all @item.Name
+                    </a>
+
+                    <form class="navbar-form" asp-controller="Home" asp-action="Filter" method="post" asp-route-catalogue="@item.Name">
+                        <input class="form-control" placeholder="Search in @item.Name" id="bookTitle" name="bookTitle">
+                    </form>
+                </div>
+
+                @foreach (var book in item.Books)
+                {
+                    @await Html.PartialAsync("_Book", book)
+                }
+            </div>
+        }
+
+    </div>
+
+</div>
