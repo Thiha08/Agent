@@ -33,11 +33,12 @@ namespace Agent.Web.Controllers
             return View(viewModelCatalogues);
         }
 
-        public async Task<IActionResult> Filter(string catalogue, string bookTitle)
+        public async Task<IActionResult> Buy(int bookId)
         {
-            var books = await _bookService.GetCatalogueBooksAsync(catalogue, bookTitle);
-            var viewModelBooks = _mapper.Map<IEnumerable<BookViewModel>>(books);
-            return View(viewModelBooks);
+            var test = bookId;
+            //var books = await _bookService.GetCatalogueBooksAsync(catalogue, bookTitle);
+            //var viewModelBooks = _mapper.Map<IEnumerable<BookViewModel>>(books);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
