@@ -16,6 +16,12 @@ namespace OnePay.PaymentApi
         private IOnePayApiSettings _onePayApiSettings;
         private readonly ILogger<PaymentService> _logger;
 
+        public PaymentService(IOnePayApiSettings onePayApiSettings, ILogger<PaymentService> logger)
+        {
+            _onePayApiSettings = onePayApiSettings;
+            _logger = logger;
+        }
+
         public async Task<PaymentResponse> MakePaymentAsync(PaymentRequest request)
         {
             try

@@ -1,4 +1,5 @@
-﻿using Agent.Core.Entities;
+﻿using Agent.Core.Dtos;
+using Agent.Core.Entities;
 using Agent.Web.ViewModels;
 using AutoMapper;
 using System;

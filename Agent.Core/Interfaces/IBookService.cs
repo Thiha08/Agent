@@ -1,4 +1,5 @@
-﻿using Agent.Core.Entities;
+﻿using Agent.Core.Dtos;
+using Agent.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace Agent.Core.Interfaces
 
         Task<IEnumerable<Book>> GetCatalogueBooksAsync(string catalogueName, string bookTitle = null);
 
-        Task BuyBookAsync();
+        Task<ServiceResponse> BuyBookAsync(int bookId);
     }
 }

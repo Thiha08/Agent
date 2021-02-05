@@ -1,9 +1,11 @@
 ﻿using Agent.Core.Entities;
 using Agent.Core.Interfaces;
+using Agent.Web.ViewExtensions;
 using Agent.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,7 +27,7 @@ namespace Agent.Web.Controllers
         }
 
         // GET: Home
-        public async Task<IActionResult> Index(string catalogue= null)
+        public async Task<IActionResult> Index(string catalogue = null)
         {
             TempData["catalogue"] = catalogue;
             var catalogues = await _catalogueService.GetCataloguesAsync(catalogue);
@@ -35,10 +37,23 @@ namespace Agent.Web.Controllers
 
         public async Task<IActionResult> Buy(int bookId)
         {
-            var test = bookId;
-            //var books = await _bookService.GetCatalogueBooksAsync(catalogue, bookTitle);
-            //var viewModelBooks = _mapper.Map<IEnumerable<BookViewModel>>(books);
+            var serviceResponse = await _bookService.BuyBookAsync(bookId);
+            GenerateAlertMessage(serviceResponse.Success, serviceResponse.Message);
             return RedirectToAction(nameof(Index));
+        }
+
+        private void GenerateAlertMessage(bool isSuccessful, string message)
+        {
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                var alertViewModel = new AlertViewModel
+                {
+                    Success = isSuccessful,
+                    Message = message
+                };
+
+                TempData.Put("AlertViewModel", alertViewModel);
+            }
         }
     }
 }
