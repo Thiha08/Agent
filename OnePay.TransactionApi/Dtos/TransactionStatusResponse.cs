@@ -19,7 +19,7 @@ namespace OnePay.TransactionApi.Dtos
         /// <para>Response Code</para>
         /// <para>Example: 000</para>
         /// </summary>
-        public TransactionStatus TransactionStatus { get; set; }
+        public string TransactionStatus { get; set; }
 
         /// <summary>
         /// <para>Response Code</para>

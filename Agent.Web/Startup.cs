@@ -1,5 +1,6 @@
 using Agent.Core.Constants.OnePay;
 using Agent.Infrastructure;
+using Agent.Infrastructure.Mappers;
 using Agent.Web.Mappers;
 using Autofac;
 using AutoMapper;
@@ -40,6 +41,7 @@ namespace Agent.Web
             services.AddDbContext(connectionString);
 
             services.AddAutoMapper(typeof(AutomapperMaps));
+            services.AddAutoMapper(typeof(InfrastructureMaps));
 
             services.AddControllersWithViews();
 

@@ -4,9 +4,9 @@ using OnePay.TransactionApi.Dtos;
 
 namespace Agent.Infrastructure.Mappers
 {
-    public class AutomapperMaps : Profile
+    public class InfrastructureMaps : Profile
     {
-        public AutomapperMaps()
+        public InfrastructureMaps()
         {
             CreateMap<InquiryDetail, InquiryDetailDto>().ReverseMap();
         }
