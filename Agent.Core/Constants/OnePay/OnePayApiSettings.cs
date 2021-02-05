@@ -25,5 +25,9 @@ namespace Agent.Core.Constants.OnePay
         public string Channel { get; set; }
 
         public string Version { get; set; }
+
+        public string AgentID { get; set; }
+
+        public string AgentSecretKey { get; set; }
     }
 }

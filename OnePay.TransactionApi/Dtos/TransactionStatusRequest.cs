@@ -23,22 +23,6 @@ namespace OnePay.TransactionApi.Dtos
         public string SequenceNo { get; set; }
 
         /// <summary>
-        /// One Pay User Phone number
-        /// </summary>
-        public string ReceiverNo { get; set; }
-
-        /// <summary>
-        /// Must be Number ex (5000)
-        /// </summary>
-        public string Amount { get; set; }
-
-        /// <summary>
-        /// <para>Put Current DateTime in this field with the following format:</para>
-        /// <para>yyyy-MM-dd HH:mm:ss</para>
-        /// </summary>
-        public string RequestTimeStamp { get; set; }
-
-        /// <summary>
         /// <para>Value must be Upper Case. For 1.0, HMACSHA1 cryptographic hash value of:</para>
         /// <para>AgentID + SubAgentID + InvoiceNo + SequenceNo + ReceiverNo + Amount + ExpiredSeconds + RequestTimeStamp</para>
         /// </summary>

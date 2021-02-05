@@ -1,0 +1,35 @@
+﻿@using Agent.Web.ViewModels
+@using Agent.Web.ViewExtensions
+
+@{
+    var alertMessage = TempData.Get<AlertViewModel>("AlertViewModel");
+}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+                <h1 class="h2">Transaction</h1>
+            </div>
+            <div class="col-md-5">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div id="contact" class="container">
+        @if (alertMessage != null)
+        {
+            <div role="alert" class="alert alert-@(alertMessage.Success ? "success" : "danger") alert-dismissible" style="margin-top: 1rem;">
+                <button type="button" data-dismiss="alert" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                @alertMessage.Message
+            </div>
+        }
+        <div class="row">
+            @await Html.PartialAsync("_Endpoints")
+            <div class="col-lg-8">
+            </div>
+        </div>
+    </div>
+</div>

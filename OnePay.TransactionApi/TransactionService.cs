@@ -27,7 +27,7 @@ namespace OnePay.TransactionApi
         {
             try
             {
-                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.AgentSecretKey);
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
                 string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionInquiryUrl;
@@ -51,7 +51,7 @@ namespace OnePay.TransactionApi
         {
             try
             {
-                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.AgentSecretKey);
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
                 string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionUrl;
@@ -75,7 +75,7 @@ namespace OnePay.TransactionApi
         {
             try
             {
-                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.AgentSecretKey);
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
                 string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionStatusUrl;

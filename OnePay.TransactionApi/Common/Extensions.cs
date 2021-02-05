@@ -29,8 +29,7 @@ namespace OnePay.TransactionApi.Common
             return new TransactionStatusResponse
             {
                 ResponseCode = TransactionResponseCode.SomethingWentWrong,
-                ResponseDescription = TransactionResponseCode.SomethingWentWrong.ToDescription(),
-                SequenceNo = value.SequenceNo
+                ResponseDescription = TransactionResponseCode.SomethingWentWrong.ToDescription()
             };
         }
     }

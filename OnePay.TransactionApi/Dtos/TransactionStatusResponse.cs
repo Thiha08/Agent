@@ -1,9 +1,26 @@
 ﻿using OnePay.TransactionApi.Common;
+using System.Transactions;
 
 namespace OnePay.TransactionApi.Dtos
 {
     public class TransactionStatusResponse
     {
+        /// <summary>
+        /// One Pay User Phone number
+        /// </summary>
+        public string ReceiverNo { get; set; }
+
+        /// <summary>
+        /// Must be Number ex (5000)
+        /// </summary>
+        public string Amount { get; set; }
+
+        /// <summary>
+        /// <para>Response Code</para>
+        /// <para>Example: 000</para>
+        /// </summary>
+        public TransactionStatus TransactionStatus { get; set; }
+
         /// <summary>
         /// <para>Response Code</para>
         /// <para>Example: 000</para>
@@ -15,11 +32,5 @@ namespace OnePay.TransactionApi.Dtos
         /// <para>Example: Success</para>
         /// </summary>
         public string ResponseDescription { get; set; }
-
-        /// <summary>
-        /// <para>Unique Sequence Number (Length must be between 30 and 50)</para>
-        /// <para>Example: CEF11DB87838433EB9F33394AE98E3E9 or 100000000000000000000000000121</para>
-        /// </summary>
-        public string SequenceNo { get; set; }
     }
 }

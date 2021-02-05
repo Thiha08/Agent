@@ -1,0 +1,43 @@
+﻿@using Agent.Core.Dtos
+@using Agent.Web.ViewModels
+@using Agent.Web.ViewExtensions
+
+@model TransactionStatusDto
+
+@{
+    var alertMessage = TempData.Get<AlertViewModel>("AlertViewModel");
+}
+
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+                <h1 class="h2">Transaction Status</h1>
+            </div>
+            <div class="col-md-5">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div id="contact" class="container">
+        @if (alertMessage != null)
+        {
+            <div role="alert" class="alert alert-@(alertMessage.Success ? "success" : "danger") alert-dismissible" style="margin-top: 1rem;">
+                <button type="button" data-dismiss="alert" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                @alertMessage.Message
+            </div>
+        }
+        <div class="row">
+            @await Html.PartialAsync("_Endpoints")
+            <div class="col-lg-8">
+                <section class="bar mb-0">
+                    <p><strong>Receiver No.</strong> : @Model?.ReceiverNo</p>
+                    <p><strong>Amount</strong> : @Model?.Amount</p>
+                    <p><strong>Status</strong> : @Model?.Status</p>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

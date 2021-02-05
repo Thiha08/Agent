@@ -57,6 +57,7 @@ namespace Agent.Infrastructure
 
             builder.RegisterType<CatalogueService>().As<ICatalogueService>().InstancePerDependency();
             builder.RegisterType<BookService>().As<IBookService>().InstancePerDependency();
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
 
             // OnePay Services
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerDependency();
