@@ -1,6 +1,12 @@
-﻿using OnePay.TransactionApi.Dtos;
+﻿using Agent.Core.Constants.OnePay;
+using Agent.Core.Extensions;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using OnePay.TransactionApi.Common;
+using OnePay.TransactionApi.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,21 +14,86 @@ namespace OnePay.TransactionApi
 {
     public class TransactionService : ITransactionService
     {
-        public Task<TransactionStatusResponse> CheckTransactionStatusAsync(TransactionStatusRequest request)
+        private IOnePayApiSettings _onePayApiSettings;
+        private readonly ILogger<TransactionService> _logger;
+
+        public TransactionService(IOnePayApiSettings onePayApiSettings, ILogger<TransactionService> logger)
         {
-            throw new NotImplementedException();
+            _onePayApiSettings = onePayApiSettings;
+            _logger = logger;
         }
 
-        public Task<TransactionInquiryResponse> GetTransactionInquiry(TransactionInquiryRequest request)
+        public async Task<TransactionInquiryResponse> GetTransactionInquiryAsync(TransactionInquiryRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionInquiryUrl;
+
+                using var httpClient = new HttpClient();
+                using var response = await httpClient.PostAsync(requestUri, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<TransactionInquiryResponse>(responseString);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(
+                    "GetTransactionInquiry  is failed." + Environment.NewLine +
+                    exception.Message);
+
+                return request.GetSystemErrorResponse();
+            }
         }
 
-        public Task<TransactionResponse> MakeTransactionAsync(TransactionRequest request)
+        public async Task<TransactionResponse> MakeTransactionAsync(TransactionRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionUrl;
+
+                using var httpClient = new HttpClient();
+                using var response = await httpClient.PostAsync(requestUri, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<TransactionResponse>(responseString);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(
+                    "MakeTransaction  is failed." + Environment.NewLine +
+                    exception.Message);
+
+                return request.GetSystemErrorResponse();
+            }
         }
 
-        
+        public async Task<TransactionStatusResponse> CheckTransactionStatusAsync(TransactionStatusRequest request)
+        {
+            try
+            {
+                request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
+
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                string requestUri = _onePayApiSettings.BaseUrl + _onePayApiSettings.TransactionStatusUrl;
+
+                using var httpClient = new HttpClient();
+                using var response = await httpClient.PostAsync(requestUri, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<TransactionStatusResponse>(responseString);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(
+                    "CheckTransactionStatus  is failed." + Environment.NewLine +
+                    exception.Message);
+
+                return request.GetSystemErrorResponse();
+            }
+        }
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OnePay.TransactionApi.Common;
 
 namespace OnePay.TransactionApi.Dtos
 {
@@ -15,7 +13,7 @@ namespace OnePay.TransactionApi.Dtos
         /// <para>Response Code</para>
         /// <para>Example: 000</para>
         /// </summary>
-        public string ResponseCode { get; set; }
+        public TransactionResponseCode ResponseCode { get; set; }
 
         /// <summary>
         /// <para>Response Description</para>

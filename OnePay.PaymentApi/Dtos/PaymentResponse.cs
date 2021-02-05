@@ -1,5 +1,5 @@
-﻿using Agent.Core.Constants.OnePay;
-using Agent.Core.Extensions;
+﻿using Agent.Core.Extensions;
+using OnePay.PaymentApi.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnePay.PaymentApi.Dtos
@@ -44,7 +44,7 @@ namespace OnePay.PaymentApi.Dtos
         /// eg. 000, 001,002,012,909
         /// </summary>
         [StringLength(4)]
-        public OnePayResponseCode RespCode { get; set; }
+        public PaymentResponseCode RespCode { get; set; }
 
         /// <summary>
         /// Value must be Upper Case. For 1.0, HMACSHA1 

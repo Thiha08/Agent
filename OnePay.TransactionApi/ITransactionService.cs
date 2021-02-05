@@ -5,7 +5,7 @@ namespace OnePay.TransactionApi
 {
     public interface ITransactionService
     {
-        Task<TransactionInquiryResponse> GetTransactionInquiry(TransactionInquiryRequest request);
+        Task<TransactionInquiryResponse> GetTransactionInquiryAsync(TransactionInquiryRequest request);
 
         Task<TransactionResponse> MakeTransactionAsync(TransactionRequest request);
 
