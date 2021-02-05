@@ -1,8 +1,16 @@
 ﻿body {
 }
 
+.navbar-brand {
+    text-transform: uppercase;
+    padding-top: 1.3125rem;
+    
+}
 
+footer.main-footer {
+    background: none;
+}
 
 footer.main-footer .copyrights {
-     margin-top: 0px; 
+    margin-top: 0px;
 }

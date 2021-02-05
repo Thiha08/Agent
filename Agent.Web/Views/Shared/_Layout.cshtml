@@ -39,20 +39,8 @@
 </head>
 <body>
     <div id="all">
-        <div id="heading-breadcrumbs">
-            <div class="container">
-                <div class="row d-flex align-items-center flex-wrap">
-                    <div class="col-md-7">
-                        <h1 class="h2">Programming Books</h1>
-                    </div>
-                    <div class="col-md-5">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="content">
-            @RenderBody()
-        </div>
+        @await Html.PartialAsync("_Navbar")
+        @RenderBody()
         <!-- FOOTER -->
         <footer class="main-footer">
             <div class="copyrights">

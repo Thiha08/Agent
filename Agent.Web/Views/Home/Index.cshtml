@@ -12,47 +12,61 @@
     var alertMessage = TempData.Get<AlertViewModel>("AlertViewModel");
 }
 
-<div class="container">
-    @if (alertMessage != null)
-    {
-        <div role="alert" class="alert alert-@(alertMessage.Success ? "success" : "danger") alert-dismissible" style="margin-top: 1rem;">
-            <button type="button" data-dismiss="alert" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            @alertMessage.Message
-        </div>
-    }
-    <div class="row bar">
-        <div class="col-md-9">
-            <p class="text-muted lead">Many of the best coding books are used by universities and professional developers to improve their skills. If you’re learning how to code on your own, there’s nothing to say you can’t independently pick up some top books on programming and do the same. </p>
-            <div class="row products products-big">
-                @foreach (var item in Model)
-                {
-                    @foreach (var book in item.Books)
-                    {
-                        @await Html.PartialAsync("_Book", book)
-                    }
-                }
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+                <h1 class="h2">Programming Books</h1>
+            </div>
+            <div class="col-md-5">
             </div>
         </div>
-        <div class="col-md-3">
-            <!-- MENUS AND FILTERS-->
-            <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                    <h3 class="h4 panel-title">Catalogues</h3>
+    </div>
+</div>
+<div id="content">
+    <div class="container">
+        @if (alertMessage != null)
+        {
+            <div role="alert" class="alert alert-@(alertMessage.Success ? "success" : "danger") alert-dismissible" style="margin-top: 1rem;">
+                <button type="button" data-dismiss="alert" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                @alertMessage.Message
+            </div>
+        }
+        <div class="row bar">
+            <div class="col-md-9">
+                <p class="text-muted lead">Many of the best coding books are used by universities and professional developers to improve their skills. If you’re learning how to code on your own, there’s nothing to say you can’t independently pick up some top books on programming and do the same. </p>
+                <div class="row products products-big">
+                    @foreach (var item in Model)
+                    {
+                        @foreach (var book in item.Books)
+                        {
+                            @await Html.PartialAsync("_Book", book)
+                        }
+                    }
                 </div>
-                <div class="panel-body">
-                    <ul class="nav nav-pills flex-column text-sm category-menu">
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="Index" class="nav-link @(catalogue == "" ? "active" : "") d-flex align-items-center justify-content-between"><span>All Books</span></a>
-                            <ul class="nav nav-pills flex-column">
-                                @foreach (var item in Model)
-                                {
-                                    <li class="nav-item @(catalogue == @item.Name ? "active" : "")"><a asp-controller="Home" asp-action="Index" asp-route-catalogue="@item.Name" class="nav-link @(catalogue == @item.Name ? "active" : "")">@item.Name</a></li>
-                                }
-                            </ul>
-                        </li>
-                    </ul>
+            </div>
+            <div class="col-md-3">
+                <!-- MENUS AND FILTERS-->
+                <div class="panel panel-default sidebar-menu">
+                    <div class="panel-heading">
+                        <h3 class="h4 panel-title">Catalogues</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-pills flex-column text-sm category-menu">
+                            <li class="nav-item">
+                                <a asp-controller="Home" asp-action="Index" class="nav-link @(catalogue == "" ? "active" : "") d-flex align-items-center justify-content-between"><span>All Books</span></a>
+                                <ul class="nav nav-pills flex-column">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="nav-item @(catalogue == @item.Name ? "active" : "")"><a asp-controller="Home" asp-action="Index" asp-route-catalogue="@item.Name" class="nav-link @(catalogue == @item.Name ? "active" : "")">@item.Name</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
