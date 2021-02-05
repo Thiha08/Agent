@@ -7,5 +7,6 @@ namespace Agent.Infrastructure.OnePay
 {
     public class AccountService : IAccountService
     {
+
     }
 }

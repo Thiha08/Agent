@@ -44,7 +44,7 @@ namespace OnePay.TransactionApi.Dtos
         /// <summary>
         /// Invoice Number
         /// </summary>
-        public string nvoiceNo { get; set; }
+        public string InvoiceNo { get; set; }
 
         /// <summary>
         /// Need this to request transaction API after inquiry is success

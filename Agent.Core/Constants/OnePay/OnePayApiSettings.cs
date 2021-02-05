@@ -6,7 +6,15 @@ namespace Agent.Core.Constants.OnePay
 {
     public class OnePayApiSettings : IOnePayApiSettings
     {
-        public string Url { get; set; }
+        public string BaseUrl { get; set; }
+
+        public string DirectPaymentUrl { get; set; }
+
+        public string TransactionInquiryUrl { get; set; }
+
+        public string TransactionUrl { get; set; }
+
+        public string TransactionStatusUrl { get; set; }
 
         public string MerchantUserId { get; set; }
 
