@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Web", "Agent.Web\Agent.Web.csproj", "{B47194CB-1247-42DA-B139-F39761B20941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.Core", "Agent.Core\Agent.Core.csproj", "{05917EE4-123E-44B2-8CD2-8B5C812235FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Core", "Agent.Core\Agent.Core.csproj", "{05917EE4-123E-44B2-8CD2-8B5C812235FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.Infrastructure", "Agent.Infrastructure\Agent.Infrastructure.csproj", "{DBA50B8B-7604-4C03-ABB1-CCE1DFB994D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Infrastructure", "Agent.Infrastructure\Agent.Infrastructure.csproj", "{DBA50B8B-7604-4C03-ABB1-CCE1DFB994D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnePay.PaymentApi", "OnePay.PaymentApi\OnePay.PaymentApi.csproj", "{39449211-23D3-4FF2-A5CA-7F7305B398EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePay.PaymentApi", "OnePay.PaymentApi\OnePay.PaymentApi.csproj", "{39449211-23D3-4FF2-A5CA-7F7305B398EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnePay.TransactionApi", "OnePay.TransactionApi\OnePay.TransactionApi.csproj", "{92341C83-7C29-41F7-9213-A01489C75609}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePay.TransactionApi", "OnePay.TransactionApi\OnePay.TransactionApi.csproj", "{92341C83-7C29-41F7-9213-A01489C75609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.SharedKernel", "Agent.SharedKernel\Agent.SharedKernel.csproj", "{3685F223-E011-4922-B77B-FADB6F9A89E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.SharedKernel", "Agent.SharedKernel\Agent.SharedKernel.csproj", "{3685F223-E011-4922-B77B-FADB6F9A89E8}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DF40AAAF-94A1-4521-8C81-4EAC7B911BC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.Hangfire", "Agent.Hangfire\Agent.Hangfire.csproj", "{D3C8FE70-D552-4BC6-9D26-FCBF093704D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.Web", "Agent.Web\Agent.Web.csproj", "{4D196499-F63E-4A11-9CE4-CF71069D16FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B47194CB-1247-42DA-B139-F39761B20941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B47194CB-1247-42DA-B139-F39761B20941}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B47194CB-1247-42DA-B139-F39761B20941}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B47194CB-1247-42DA-B139-F39761B20941}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05917EE4-123E-44B2-8CD2-8B5C812235FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05917EE4-123E-44B2-8CD2-8B5C812235FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05917EE4-123E-44B2-8CD2-8B5C812235FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,11 +45,24 @@ Global
 		{3685F223-E011-4922-B77B-FADB6F9A89E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3685F223-E011-4922-B77B-FADB6F9A89E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3685F223-E011-4922-B77B-FADB6F9A89E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF40AAAF-94A1-4521-8C81-4EAC7B911BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF40AAAF-94A1-4521-8C81-4EAC7B911BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF40AAAF-94A1-4521-8C81-4EAC7B911BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF40AAAF-94A1-4521-8C81-4EAC7B911BC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C8FE70-D552-4BC6-9D26-FCBF093704D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C8FE70-D552-4BC6-9D26-FCBF093704D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C8FE70-D552-4BC6-9D26-FCBF093704D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C8FE70-D552-4BC6-9D26-FCBF093704D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D196499-F63E-4A11-9CE4-CF71069D16FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D196499-F63E-4A11-9CE4-CF71069D16FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D196499-F63E-4A11-9CE4-CF71069D16FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D196499-F63E-4A11-9CE4-CF71069D16FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E469FCD4-9AD4-4AE2-99C5-E3AA0547831C}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

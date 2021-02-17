@@ -35,9 +35,9 @@ namespace Agent.Web.Controllers
             return View(viewModelCatalogues);
         }
 
-        public async Task<IActionResult> Buy(int bookId)
+        public async Task<IActionResult> Buy(BookBuyingViewModel model)
         {
-            var serviceResponse = await _bookService.BuyBookAsync(bookId);
+            var serviceResponse = await _bookService.BuyBookAsync(model.BookId, model.Email);
             GenerateAlertMessage(serviceResponse.Success, serviceResponse.Message);
             return RedirectToAction(nameof(Index));
         }
