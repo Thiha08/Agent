@@ -1,6 +1,11 @@
 ﻿using Agent.Core;
+using Agent.Core.BackgroundJobs;
 using Agent.Core.Interfaces;
+using Agent.Core.Mail;
+using Agent.Hangfire;
+using Agent.Infrastructure.BackgroundServices;
 using Agent.Infrastructure.Data;
+using Agent.Infrastructure.Mail;
 using Agent.Infrastructure.Services;
 using Agent.SharedKernel.Interfaces;
 using Autofac;
@@ -25,11 +30,13 @@ namespace Agent.Infrastructure
             var infrastructureAssembly = Assembly.GetAssembly(typeof(InfrastructureAssembly));
             var paymentApiAssembly = Assembly.GetAssembly(typeof(PaymentApiAssembly));
             var transactionApiAssembly = Assembly.GetAssembly(typeof(TransactionApiAssembly));
+            var hangfireAssembly = Assembly.GetAssembly(typeof(HangfireAssembly));
 
             _assemblies.Add(coreAssembly);
             _assemblies.Add(infrastructureAssembly);
             _assemblies.Add(paymentApiAssembly);
             _assemblies.Add(transactionApiAssembly);
+            _assemblies.Add(hangfireAssembly);
 
 
             if (callingAssembly != null)
@@ -58,6 +65,14 @@ namespace Agent.Infrastructure
             builder.RegisterType<CatalogueService>().As<ICatalogueService>().InstancePerDependency();
             builder.RegisterType<BookService>().As<IBookService>().InstancePerDependency();
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
+
+            builder.RegisterType<EmailSender>().As<IEmailSender>().InstancePerDependency();
+
+            // Background Services
+            builder.RegisterType<EmailBackgroundService>().As<IBackgroundService>().InstancePerDependency();
+
+            // Hangfire
+            builder.RegisterType<HangfireBackgroundJobManager>().As<IBackgroundJobManager>().InstancePerDependency();
 
             // OnePay Services
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerDependency();
