@@ -14,6 +14,6 @@ namespace Agent.Core.Interfaces
 
         Task<IEnumerable<Book>> GetCatalogueBooksAsync(string catalogueName, string bookTitle = null);
 
-        Task<ServiceResponse> BuyBookAsync(int bookId);
+        Task<ServiceResponse> BuyBookAsync(int bookId, string email);
     }
 }

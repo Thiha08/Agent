@@ -1,7 +1,10 @@
-﻿using Agent.Core.Constants.OnePay;
+﻿using Agent.Core.Args;
+using Agent.Core.BackgroundJobs;
+using Agent.Core.Constants.OnePay;
 using Agent.Core.Dtos;
 using Agent.Core.Entities;
 using Agent.Core.Interfaces;
+using Agent.Infrastructure.BackgroundServices;
 using Agent.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using OnePay.PaymentApi;
@@ -20,13 +23,15 @@ namespace Agent.Infrastructure.Services
         private readonly IRepository<Book> _bookRepository;
         private readonly IRepository<Catalogue> _catalogueRepository;
         private readonly IPaymentService _paymentService;
+        private readonly IBackgroundJobManager _backgroundJobManager;
         private IOnePayApiSettings _onePayApiSettings;
 
-        public BookService(IRepository<Book> bookRepository, IRepository<Catalogue> catalogueRepository, IPaymentService paymentService, IOnePayApiSettings onePayApiSettings)
+        public BookService(IRepository<Book> bookRepository, IRepository<Catalogue> catalogueRepository, IPaymentService paymentService, IBackgroundJobManager backgroundJobManager, IOnePayApiSettings onePayApiSettings)
         {
             _bookRepository = bookRepository;
             _catalogueRepository = catalogueRepository;
             _paymentService = paymentService;
+            _backgroundJobManager = backgroundJobManager;
             _onePayApiSettings = onePayApiSettings;
         }
 
@@ -50,7 +55,7 @@ namespace Agent.Infrastructure.Services
             return catalogue.Books.Where(b => b.Title.ToLower().Contains(bookTitle.ToLower().Trim()));
         }
 
-        public async Task<ServiceResponse> BuyBookAsync(int bookId)
+        public async Task<ServiceResponse> BuyBookAsync(int bookId, string email)
         {
             var book = await _bookRepository.GetByIdAsync(bookId);
             var payment = new PaymentRequest
@@ -67,6 +72,16 @@ namespace Agent.Infrastructure.Services
                 ExpiredSeconds = 060
             };
             var response = await _paymentService.MakePaymentAsync(payment);
+
+            await _backgroundJobManager.EnqueueAsync<EmailBackgroundService, EmailArgs>(
+            new EmailArgs
+            {
+                From = "TESTING",
+                To = email,
+                Subject = $"Buying Book - {book.Title}",
+                Body = $"The transaction is { (response.RespCode == PaymentResponseCode.Success ? "" : "not" )} successful!",
+            });
+
             return new ServiceResponse
             {
                 Success = response.RespCode == PaymentResponseCode.Success,
