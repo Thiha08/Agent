@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+
+  agentdb:
+    container_name: agentdb
+    ports:
+      - "1434:1433"
+    environment:
+      SA_PASSWORD: "Welcome123!@#"
+      ACCEPT_EULA: "Y"
+
+  agent.web:
+    container_name: agentweb
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=agentdb;Initial Catalog=agent-onepay;User Id=sa;Password=Welcome123!@#;"
+    depends_on:
+      - agentdb
+    volumes:
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https
+    ports:
+      - "8002:80"
