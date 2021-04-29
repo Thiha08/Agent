@@ -26,6 +26,7 @@ namespace OnePay.PaymentApi
         {
             try
             {
+                //throw new NotImplementedException();
                 request.HashValue = Hashing.GetHMAC(request.GetSignatureString(), _onePayApiSettings.Token);
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");

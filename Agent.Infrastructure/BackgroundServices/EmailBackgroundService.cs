@@ -2,6 +2,7 @@
 using Agent.Core.BackgroundJobs;
 using Agent.Core.Interfaces;
 using Agent.Core.Mail;
+using Hangfire;
 using System.Threading.Tasks;
 
 namespace Agent.Infrastructure.BackgroundServices
@@ -15,6 +16,7 @@ namespace Agent.Infrastructure.BackgroundServices
             _emailSender = emailSender;
         }
 
+        [AutomaticRetry(Attempts = 0)]
         public override async Task ExecuteAsync(EmailArgs args)
         {
             await _emailSender.SendAsync(args.From, args.To, args.Subject, args.Body);
